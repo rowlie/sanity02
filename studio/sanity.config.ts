@@ -22,7 +22,6 @@ const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 
 // URL for preview functionality, defaults to localhost:3000 if not set
-SANITY_STUDIO_PREVIEW_URL="https://magical-naiad-9051c3.netlify.app"
 
 
 // Define the home location for the presentation tool
