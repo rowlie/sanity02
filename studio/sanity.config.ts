@@ -47,8 +47,6 @@ export default defineConfig({
   dataset,
 
   plugins: [
-    // Presentation tool configuration for Visual Editing,
-    // with previewUrl section removed
     presentationTool({
       resolve: {
         mainDocuments: defineDocuments([
@@ -74,4 +72,47 @@ export default defineConfig({
           page: defineLocations({
             select: {
               name: 'name',
-              slug:
+              slug: 'slug.current',
+            },
+            resolve: (doc) => ({
+              locations: [
+                {
+                  title: doc?.name || 'Untitled',
+                  href: resolveHref('page', doc?.slug),
+                },
+              ],
+            }),
+          }),
+          post: defineLocations({
+            select: {
+              title: 'title',
+              slug: 'slug.current',
+            },
+            resolve: (doc) => ({
+              locations: [
+                {
+                  title: doc?.title || 'Untitled',
+                  href: resolveHref('post', doc?.slug),
+                },
+                {
+                  title: 'Home',
+                  href: '/',
+                },
+              ].filter(Boolean) as DocumentLocation[],
+            }),
+          }),
+        },
+      },
+    }),
+    structureTool({
+      structure,
+    }),
+    unsplashImageAsset(),
+    assist(),
+    visionTool(),
+  ],
+
+  schema: {
+    types: schemaTypes,
+  },
+})
