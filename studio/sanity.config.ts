@@ -103,6 +103,14 @@ export default defineConfig({
           }),
         },
       },
+      previewUrl: {
+        initial: 'https://magical-naiad-9051c3.netlify.app', // Netlify deployed site
+        previewMode: {
+          enable: '/api/draft-mode/enable',    // Next.js API endpoint for draft mode preview
+          disable: '/api/draft-mode/disable',  // Next.js API endpoint to turn it off
+        },
+      },
+      allowOrigins: ['https://magical-naiad-9051c3.netlify.app'], // Allow this domain for embedded previews
     }),
     structureTool({
       structure,
