@@ -1,3 +1,0 @@
-/*
-  X-Frame-Options:
-  Content-Security-Policy: frame-ancestors 'self' https://www.sanity.io https://magical-naiad-9051c3.netlify.app;
