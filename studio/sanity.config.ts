@@ -1,6 +1,5 @@
 /**
- * This config is used to configure your Sanity Studio.
- * Learn more: https://www.sanity.io/docs/configuration
+ * This config is used to configure your Sanity Studio for both local and cloud presentation mode.
  */
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
@@ -16,11 +15,9 @@ import {
 } from 'sanity/presentation'
 import {assist} from '@sanity/assist'
 
-// Environment variables for project configuration
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 
-// Define the home location for the presentation tool
 const homeLocation = {
   title: 'Home',
   href: '/',
@@ -38,7 +35,6 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
   }
 }
 
-// Main Sanity configuration
 export default defineConfig({
   name: 'default',
   title: 'Sanity + Next.js Starter Template',
@@ -104,13 +100,17 @@ export default defineConfig({
         },
       },
       previewUrl: {
-        initial: 'https://magical-naiad-9051c3.netlify.app', // Netlify deployed site
+        // Use the cloud URL for online Studio; local can be dynamically set based on environment if desired
+        initial: 'https://magical-naiad-9051c3.netlify.app',
         previewMode: {
-          enable: '/api/draft-mode/enable',    // Next.js API endpoint for draft mode preview
-          disable: '/api/draft-mode/disable',  // Next.js API endpoint to turn it off
+          enable: '/api/draft-mode/enable',
+          disable: '/api/draft-mode/disable',
         },
       },
-      allowOrigins: ['https://magical-naiad-9051c3.netlify.app'], // Allow this domain for embedded previews
+      allowOrigins: [
+        'http://localhost:3000',                    // local frontend
+        'https://magical-naiad-9051c3.netlify.app', // Netlify cloud
+      ],
     }),
     structureTool({
       structure,
